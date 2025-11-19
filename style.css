@@ -58,6 +58,22 @@ html {
     font-size: 25px;
 }
 
+.typewriter-container {
+    display: flex;
+    justify-content: center;
+}
+
+.typewriter {
+    border-right: 2px solid black;
+    width: fit-content;
+    animation: blink 0.75s step-end infinite;
+}
+
+/* blinking cursor */
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
 #about {
     padding: 80px;
 }
@@ -92,6 +108,30 @@ html {
 
 .tech-stack {
     margin-top: 150px;
+    overflow: hidden;
+}
+
+.tech-icons-wrapper {
+    display: flex;
+    width: fit-content;
+    animation: scroll 25s linear infinite;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.tech-icon:hover {
+    transform: scale(1.1);
+}
+
+.tech-icons-wrapper:hover {
+    animation-play-state: paused;
 }
 
 .tech-icons {
@@ -99,6 +139,7 @@ html {
     overflow-x: scroll; /* 放不下的圖片往右放 */
     scrollbar-width: none; /* 隱藏 scrollbar */
     gap: 12.5px;
+    transition: transform 0.3s ease;
 }
 
 .tech-icon {
@@ -130,6 +171,31 @@ html {
     margin-bottom: 25px;
 }
 
+.project-search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.project-search input {
+    flex: 1;
+    background-color: white;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 16px;
+}
+
+.project-search button {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 .project-list {
     display: flex;
     overflow-x: scroll;
@@ -140,7 +206,9 @@ html {
 }
 
 .project-item {
-    flex: 0 0 375px; /* grow, shrink, basis */
+    flex: 1 1 375px; 
+    min-width: 375px;
+    height: 250px;
     background-color: white;
     border-radius: 16px;
     padding: 35px;
@@ -151,6 +219,31 @@ html {
     /* 加上陰影，向下 4px、模糊 6px、10% 透明度的黑色 */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+}
+
+/* Control hovered card */
+.project-list .project-item:hover {
+    flex: 1 1 0;
+}
+
+/* when list hovered, control "not" hovered cards */
+.project-list:hover .project-item:not(:hover) {
+    flex: 0 0 90px; 
+    min-width: 90px;
+    
+}
+
+.project-item .content { 
+    transition: opacity 0.3s ease;
+}
+
+/* when list hovered, control "not" hovered cards' content */
+.project-list:hover .project-item:not(:hover) .content {
+    opacity: 0;
+}
+
+.project-list:hover .project-item:not(:hover) .title {
+    opacity: 1;
 }
 
 .project-item h3 {
