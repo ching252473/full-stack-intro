@@ -3,50 +3,53 @@
     padding: 0;
 }
 
-
-.nav-links {
-	  display: flex;
-	  list-style: none;  /* 移除項目預設樣式 */
-    gap: 50px;                      
-}
-
-.nav-item a {
-    text-decoration: none;  /* 移除文字預設樣式 */
-    color: black;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-nav {
-		background-color: white;
-    position: fixed;  /* 固定位置 */
-    width: 100%;
-    height: 60px;
-    z-index: 1000;  /* 數字越大在越上方 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.nav-item a:hover {
-    color: gray;
-}
-
-.nav-item a {
-		/* ... */
-    transition: color 0.3s;
+body {
+    background-color: #f5f5f7;
 }
 
 html {
     scroll-behavior: smooth;
 }
 
+/* Navigation Bar */
+
+nav {
+    background-color: #f5f5f7;
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 50px;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: black;
+    font-size: 13px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-item a:hover {
+    color: gray;
+}
+
+/* Home */
+
 #home {
-    text-align: center;  /* 文字水平置中 */
+    text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;  /* 垂直置中 */
-    height: 100vh;  /* 佔滿整個畫面 */
+    justify-content: center;
+    height: 100vh;
 }
 
 #home h1 {
@@ -58,28 +61,14 @@ html {
     font-size: 25px;
 }
 
-.typewriter-container {
-    display: flex;
-    justify-content: center;
-}
-
-.typewriter {
-    border-right: 2px solid black;
-    width: fit-content;
-    animation: blink 0.75s step-end infinite;
-}
-
-/* blinking cursor */
-@keyframes blink {
-    50% { border-color: transparent; }
-}
+/* About */
 
 #about {
     padding: 80px;
 }
 
 .profile-pic {
-    border-radius: 50%; /* 圓形 */
+    border-radius: 50%;
     width: 250px;
     height: 250px;
 }
@@ -100,12 +89,6 @@ html {
     line-height: 2;
 }
 
-.tech-icon {
-    width: 100px;
-    height: 100px;
-    margin: 12.5px;
-}
-
 .tech-stack {
     margin-top: 150px;
     overflow: hidden;
@@ -117,13 +100,19 @@ html {
     animation: scroll 25s linear infinite;
 }
 
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
+.tech-icons {
+    display: flex;
+    scrollbar-width: none;
+    gap: 12.5px;
+}
+
+.tech-icon {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin: 12.5px;
+    /* flex-shrink: 0; */
+    transition: transform 0.3s ease;
 }
 
 .tech-icon:hover {
@@ -133,20 +122,13 @@ html {
 .tech-icons-wrapper:hover {
     animation-play-state: paused;
 }
-
-.tech-icons {
-    display: flex;
-    overflow-x: scroll; /* 放不下的圖片往右放 */
-    scrollbar-width: none; /* 隱藏 scrollbar */
-    gap: 12.5px;
-    transition: transform 0.3s ease;
-}
-
-.tech-icon {
-    width: 100px;
-    height: 100px;
-    object-fit: contain; /* 維持圖片比例 */
-    margin: 12.5px;
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 .timeline {
@@ -161,6 +143,8 @@ html {
     font-size: 22.5px;
     line-height: 2;
 }
+
+/* Projects */
 
 #projects {
     padding: 80px;
@@ -201,7 +185,7 @@ html {
     overflow-x: scroll;
     scrollbar-width: none;
     gap: 25px;
-    padding: 15px; /* 讓陰影效果不會被截斷 */
+    padding: 15px;
     margin: -15px;
 }
 
@@ -209,16 +193,16 @@ html {
     flex: 1 1 375px; 
     min-width: 375px;
     height: 250px;
+
     background-color: white;
     border-radius: 16px;
     padding: 35px;
-    cursor: pointer; /* 滑鼠移上去變成手指 */
+    cursor: pointer;
     display: flex;
     flex-direction: column;
-    min-height: 250px;
-    /* 加上陰影，向下 4px、模糊 6px、10% 透明度的黑色 */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    overflow: hidden;
 }
 
 /* Control hovered card */
@@ -246,26 +230,22 @@ html {
     opacity: 1;
 }
 
+
 .project-item h3 {
     font-size: 22.5px;
     margin-bottom: 12.5px;
-    background-color: transparent;
 }
 
 .project-item p {
     font-size: 17px;
     line-height: 2;
-    background-color: transparent;
-}
-
-.project-item:hover {
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-    transform: translateY(-3px); /* 往上移動 */
 }
 
 .project-item p:last-child {
-    margin-top: auto; /* 對齊底部 */
+    margin-top: auto;
 }
+
+/* Contact */
 
 #contact {
     padding: 80px;
