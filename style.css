@@ -30,12 +30,38 @@ nav {
     gap: 50px;
 }
 
+.nav-item {
+    position: relative;
+}
+
 .nav-item a {
     text-decoration: none;
     color: black;
     font-size: 13px;
     font-weight: bold;
     transition: color 0.3s;
+    display: block;
+    padding-bottom: 5px;
+}
+
+.nav-item a.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0; /* 距離父元素底部 0px */
+    left: 0;   /* 距離父元素左邊 0px */
+    right: 0;  /* 距離父元素右邊 0px */
+    height: 2px;
+    background-color: black;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
 }
 
 .nav-item a:hover {
@@ -67,10 +93,37 @@ nav {
     padding: 80px;
 }
 
+#home::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 900px; 
+    height: 900px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle,
+        rgba(176, 131, 255, 0.7) 0%,
+        rgba(131, 154, 224, 0.4) 25%,
+        rgba(255, 255, 255, 0) 50%
+    );
+    filter: blur(90px);
+    z-index: -1;
+}
+
 .profile-pic {
     border-radius: 50%;
     width: 250px;
     height: 250px;
+}
+
+@keyframes rotate360 {
+    0% { transform: rotateY(0deg); }
+    50% { transform: rotateY(180deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+.profile-pic:hover {
+  animation: rotate360 1s linear;
 }
 
 .about-me {
@@ -142,7 +195,7 @@ nav {
 .timeline li {
     font-size: 22.5px;
     line-height: 2;
-}
+} 
 
 /* Projects */
 
@@ -192,7 +245,7 @@ nav {
 .project-item {
     flex: 1 1 375px; 
     min-width: 375px;
-    height: 250px;
+    height: 350px;
 
     background-color: white;
     border-radius: 16px;
@@ -208,13 +261,14 @@ nav {
 /* Control hovered card */
 .project-list .project-item:hover {
     flex: 1 1 0;
+
 }
 
 /* when list hovered, control "not" hovered cards */
 .project-list:hover .project-item:not(:hover) {
     flex: 0 0 90px; 
     min-width: 90px;
-    
+
 }
 
 .project-item .content { 
@@ -329,4 +383,170 @@ nav {
 .social-icon svg {
     width: 24px;
     height: 24px;
+}
+
+
+#home,
+#projects,
+#sketch,
+#contact,
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+#home.visible,
+#about.visible,
+#projects.visible,
+#sketch.visible,
+#contact.visible,
+.fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Pencil Sketch 區塊 */
+
+#sketch {
+    padding: 80px;
+}
+
+#sketch h2 {
+    font-size: 50px;
+    margin-bottom: 25px;
+}
+
+/* 圖片容器 */
+.k-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 1em;
+    width: 800px;
+    height: 500px;
+    transition: all 0.4s ease;
+    left: 25%;
+    top: 50px;
+}
+
+.k-container:hover .box {
+    filter: grayscale(100%) opacity(24%);
+}
+
+/* 單張圖片 */
+.k-container .box {
+    position: relative;
+    background: var(--img) center center;
+    background-size: cover;
+    transition: all 0.4s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.k-container .box:hover {
+    filter: grayscale(0%) opacity(100%);
+}
+
+/* Grid hover 調整 */
+.k-container:has(.k-1:hover) {
+    grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+}
+
+.k-container:has(.k-2:hover) {
+    grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+}
+
+.k-container:has(.k-3:hover) {
+    grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
+}
+
+.k-container:has(.k-4:hover) {
+    grid-template-columns: 1fr 1fr 1fr 3fr 1fr;
+}
+
+.k-container:has(.k-5:hover) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 3fr;
+}
+
+/* 交錯效果 */
+.box:nth-child(odd) {
+    transform: translateY(-16px);
+}
+
+.box:nth-child(even) {
+    transform: translateY(16px);
+}
+
+/* 浮出文字 */
+.box::after {
+    content: attr(data-text);
+    position: absolute;
+    bottom: 20px;
+    background: #000;
+    color: #fff;
+    padding: 10px 10px 10px 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    transform: translateY(60px);
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.box:hover::after {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.4s;
+}
+
+/* project picture */
+.p-container {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 100px;
+}
+
+.p-item {
+    width: 300px;
+    height: 450px;
+    overflow: hidden;
+    border-radius: 12px;
+    position: relative;
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.18),
+        0 3px 10px rgba(0,0,0,0.12);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+
+}
+
+.p-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.p-item:hover {
+    transform: scale(1.3);
+    box-shadow:
+        0 20px 35px rgba(0,0,0,0.25),
+        0 6px 14px rgba(0,0,0,0.18);
+}
+
+.p-container .p-item:nth-child(3) {
+    width: 450px;
+    height: 300px;
+    margin-top: 100px;
+}
+
+/* spotlight class */
+.p-item.spotlight {
+    transform: scale(1.25) translateY(-10px);
+    z-index: 10;
+}
+
+.p-item.fade {
+    transform: scale(0.8) translateY(20px);
+    opacity: 0;
 }

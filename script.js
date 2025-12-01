@@ -12,9 +12,36 @@ function attachProjectClickListeners() {
     });
 }
 
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-item a");
+
+function updateActiveNav() {
+    let currentSection = "";
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        
+        // 如果畫面捲動位置在這個 section 的範圍內
+        if (window.scrollY >= sectionTop - 100) {
+            currentSection = section.getAttribute("id");
+        }
+    });
+    
+    // 更新 nav 連結的 active 狀態
+    navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === `#${currentSection}`) {
+            link.classList.add("active");
+        }
+    });
+}
+
+window.addEventListener("scroll", updateActiveNav);
+updateActiveNav();
+
 // Typewriter effect
 const typewriterElement = document.querySelector(".typewriter");
-const texts = ["NYCU Software Development Club.", "Core System.", "Clustron.", "HPC.", "Commonground."];
+const texts = ["Art . Nature . Life . Music", "Computer Science", "Sleeping", "born in autumn", "I N F J"];
 let textIndex = 0;
 let isDeleting = false;
 
@@ -70,22 +97,25 @@ typeWriter();
 
 const projects = [
     {
-        "title": "Full Stack Intro.",
-        "description": "從零開始認識前後端開發！從環境設定、HTML、CSS、JavaScript 等基礎打好地基，並逐步學習版面切版、網頁動態效果實作，讓大家都能獨立完成屬於自己、能「動起來」的互動式履歷網站。",
-        "date": "2025/09/22",
-        "url": "https://github.com/NYCU-SDC/full-stack-intro-frontend"
+        "title": "歲月的斑駁",
+        "description": "創作理念：在外婆家工具室的黑暗角落,放置著一把把歷史悠久、充滿著歲月痕跡的鐮刀,木牆上掛置著一捆捆的麻繩以及各式各樣的農具,旁邊身長著一顆頑強且韌性的木瓜樹苗,在這個角落處處都可以察覺時光流逝的烙印,那些破舊不堪的工具也訴說著外公外婆辛苦工作的點點滴滴。",
+        "date": "2022",
+        "url": "https://github.com/NYCU-SDC/full-stack-intro-frontend",
+        //"image":"歲月的斑駁.jpg"
     },
     {
-        "title": "Full Stack Advanced",
-        "description": "這門課會透過實作任務管理工具，熟悉 React 的開發生態系，了解前端的實作細節。下學期則會延續專案，完成 Golang 後端，學習完整的前後端開發。",
-        "date": "2025/08/29",
-        "url": "https://github.com/NYCU-SDC/full-stack-advanced-frontend"
+        "title": "酣然午後",
+        "description": "創作理念：正值暖暖的午後十分,我愜意的漫步在巷子中,無意間瞥見了這一幕,一隻玳瑁貓靜靜地沐浴陽光,凝望著那株垂下的石蓮花,另一隻貓咪微微閉雙眼,享受陽光所帶來的溫暖,一切是如此的平靜且美好,我陷入了片刻的恍惚,在喧囂的城市中,這個角落顯得更加彌足珍貴。",
+        "date": "2023",
+        "url": "https://github.com/NYCU-SDC/full-stack-advanced-frontend",
+        //"image":"酣然午後.jpg"
     },
     {
-        "title": "Core System",
-        "description": "一站式完成大部分行政操作，不必在表單、試算表和群組訊息間來回切換。\n從真實需求出發，逐步迭代。\n讓行政變簡單，把時間留給更有價值的活動與交流。",
-        "date": "2025/05/29",
-        "url": "https://github.com/NYCU-SDC/core-system-frontend"
+        "title": "盼",
+        "description": "創作理念：此作品使用橡膠版進行凸版印刷。《盼》這幅版畫以暖色調為基調,透過紅色與橘黃色構成的廟宇,營造出一種溫暖而充滿力量的氛圍,貓咪的米白色身影靜靜佇立在窗台,望向窗外的神聖景象,彷彿訴說著一種靜默中的等待與渴望。深褐色的窗框在畫面上清晰地勾勒出主題,窗內貓咪的柔和身影與窗外廟宇的古樸莊嚴形成了強烈的對比,將寧靜中的等待與生命中的期盼巧妙融合,表達了對遠方某種未來的盼望與對平靜生活的深深嚮往。",
+        "date": "2024",
+        "url": "https://github.com/NYCU-SDC/core-system-frontend",
+        //"image":"盼.jpg"
     }
 ]
 const projectsList = document.querySelector(".project-list");
@@ -100,6 +130,7 @@ function renderProjects(list) {
                     <p>${p.description.replace(/\n/g, "<br>")}</p>
                     <p class="meta">Created on ${p.date}</p>
                 </div>
+                <div class="project-img" style="background-image: url('${p.image}')"></div>
             </div>
             `;
         })
@@ -128,3 +159,63 @@ searchInput.addEventListener("keypress", (e) => {
     }
 });
 
+
+const projectItems = document.querySelectorAll(".project-item");
+
+projectItems.forEach(item => {
+    item.addEventListener("click", function() {
+        const url = this.getAttribute("data-url");
+        if (url) {
+            window.open(url, "_blank");
+        }
+    });
+});
+
+/* Fade-in & out */
+const observerOptions = {
+    threshold: 0.15,
+    rootMargin: "0px"
+};
+
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+        } else {
+            entry.target.classList.remove("visible");
+        }
+    });
+}, observerOptions);
+
+sections.forEach(section => {
+    sectionObserver.observe(section);
+});
+
+const fadeInSections = document.querySelectorAll(".fade-in-section");
+fadeInSections.forEach(section => {
+    sectionObserver.observe(section);
+});
+
+//
+const projectitems = document.querySelectorAll('.project-list .project-item');
+const imageItems = document.querySelectorAll('.p-container .p-item');
+
+projectitems.forEach((item, index) => {
+    item.addEventListener('mouseenter', () => {
+        imageItems.forEach((img, i) => {
+            if (i === index) {
+                img.classList.add('spotlight');
+                img.classList.remove('fade');
+            } else {
+                img.classList.add('fade');
+                img.classList.remove('spotlight');
+            }
+        });
+    });
+
+    item.addEventListener('mouseleave', () => {
+        imageItems.forEach(img => {
+            img.classList.remove('spotlight', 'fade');
+        });
+    });
+});
