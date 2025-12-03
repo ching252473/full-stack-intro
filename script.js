@@ -100,21 +100,21 @@ const projects = [
         "title": "歲月的斑駁",
         "description": "創作理念：在外婆家工具室的黑暗角落,放置著一把把歷史悠久、充滿著歲月痕跡的鐮刀,木牆上掛置著一捆捆的麻繩以及各式各樣的農具,旁邊身長著一顆頑強且韌性的木瓜樹苗,在這個角落處處都可以察覺時光流逝的烙印,那些破舊不堪的工具也訴說著外公外婆辛苦工作的點點滴滴。",
         "date": "2022",
-        "url": "https://github.com/NYCU-SDC/full-stack-intro-frontend",
+        //"url": "https://github.com/NYCU-SDC/full-stack-intro-frontend",
         //"image":"歲月的斑駁.jpg"
     },
     {
         "title": "酣然午後",
         "description": "創作理念：正值暖暖的午後十分,我愜意的漫步在巷子中,無意間瞥見了這一幕,一隻玳瑁貓靜靜地沐浴陽光,凝望著那株垂下的石蓮花,另一隻貓咪微微閉雙眼,享受陽光所帶來的溫暖,一切是如此的平靜且美好,我陷入了片刻的恍惚,在喧囂的城市中,這個角落顯得更加彌足珍貴。",
         "date": "2023",
-        "url": "https://github.com/NYCU-SDC/full-stack-advanced-frontend",
+        //"url": "https://github.com/NYCU-SDC/full-stack-advanced-frontend",
         //"image":"酣然午後.jpg"
     },
     {
         "title": "盼",
         "description": "創作理念：此作品使用橡膠版進行凸版印刷。《盼》這幅版畫以暖色調為基調,透過紅色與橘黃色構成的廟宇,營造出一種溫暖而充滿力量的氛圍,貓咪的米白色身影靜靜佇立在窗台,望向窗外的神聖景象,彷彿訴說著一種靜默中的等待與渴望。深褐色的窗框在畫面上清晰地勾勒出主題,窗內貓咪的柔和身影與窗外廟宇的古樸莊嚴形成了強烈的對比,將寧靜中的等待與生命中的期盼巧妙融合,表達了對遠方某種未來的盼望與對平靜生活的深深嚮往。",
         "date": "2024",
-        "url": "https://github.com/NYCU-SDC/core-system-frontend",
+        //"url": "https://github.com/NYCU-SDC/core-system-frontend",
         //"image":"盼.jpg"
     }
 ]
